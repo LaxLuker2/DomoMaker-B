@@ -1,7 +1,7 @@
-const handleError = (message) => {
+const handleError = message => {
   $("#errorMessage").text(message);
-  $("#domoMessage").animate({width:'toggle'},350);
-}
+  $("#domoMessage").animate({ width: "toggle" }, 350);
+};
 
 const sendAjax = (action, data) => {
   $.ajax({
@@ -11,7 +11,7 @@ const sendAjax = (action, data) => {
     data: data,
     dataType: "json",
     success: (result, status, xhr) => {
-      $("#domoMessage").animate({width:'hide'},350);
+      $("#domoMessage").animate({ width: "hide" }, 350);
 
       window.location = result.redirect;
     },
@@ -20,23 +20,27 @@ const sendAjax = (action, data) => {
 
       handleError(messageObj.error);
     }
-  });        
-}
+  });
+};
 
 $(document).ready(() => {
-  $("#signupForm").on("submit", (e) => {
+  $("#signupForm").on("submit", e => {
     e.preventDefault();
 
-    $("#domoMessage").animate({width:'hide'},350);
+    $("#domoMessage").animate({ width: "hide" }, 350);
 
-    if($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == '') {
+    if (
+      $("#user").val() == "" ||
+      $("#pass").val() == "" ||
+      $("#pass2").val() == ""
+    ) {
       handleError("RAWR! All fields are required");
       return false;
     }
 
-    if($("#pass").val() !== $("#pass2").val()) {
+    if ($("#pass").val() !== $("#pass2").val()) {
       handleError("RAWR! Passwords do not match");
-      return false;           
+      return false;
     }
 
     sendAjax($("#signupForm").attr("action"), $("#signupForm").serialize());
@@ -44,12 +48,12 @@ $(document).ready(() => {
     return false;
   });
 
-  $("#loginForm").on("submit", (e) => {
+  $("#loginForm").on("submit", e => {
     e.preventDefault();
 
-    $("#domoMessage").animate({width:'hide'},350);
+    $("#domoMessage").animate({ width: "hide" }, 350);
 
-    if($("#user").val() == '' || $("#pass").val() == '') {
+    if ($("#user").val() == "" || $("#pass").val() == "") {
       handleError("RAWR! Username or password is empty");
       return false;
     }
@@ -58,14 +62,14 @@ $(document).ready(() => {
 
     return false;
   });
-  
-  $("#domoForm").on("submit", (e) => {
+
+  $("#domoForm").on("submit", e => {
     e.preventDefault();
 
-    $("#domoMessage").animate({width:'hide'},350);
+    $("#domoMessage").animate({ width: "hide" }, 350);
 
-    if($("#domoName").val() == '' || $("#domoAge").val() == '') {
-      handleError("RAWR! All fields are required");
+    if ($("#domoName").val() == "" || $("#domoAge").val() == "") {
+      handleError("RAWR! Both name and age are required");
       return false;
     }
 
